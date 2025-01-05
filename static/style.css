@@ -85,8 +85,3 @@ li button {
         width: 100%;
     }
 }
-@media (max-width: 1090px) {
-    .navbar {
-        display: none; /* Hides the navbar */
-    }
-}
