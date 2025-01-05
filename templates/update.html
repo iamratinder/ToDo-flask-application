@@ -3,10 +3,10 @@
 
 
     <div class="container">
-        <form action="/update/{{todo.sno}}" method="post">
+        <form action="/update/{{ index }}" method="post">
             <h1>Update Task</h1>
-            <input type="text" id="taskInput" name="title" value="{{todo.title}}" placeholder="Update...">
-            <input type="text" id="description" name="desc" value="{{todo.desc}}" placeholder="Update Description...">
+            <input type="text" id="taskInput" name="title" value="{{ todo['title'] }}" placeholder="Update...">
+            <input type="text" id="description" name="desc" value="{{ todo['desc'] }}" placeholder="Update Description...">
             <button id="addTaskButton">Update</button>
             <ul id="taskList"></ul>
         </form>

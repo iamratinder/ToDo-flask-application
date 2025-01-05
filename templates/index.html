@@ -34,8 +34,8 @@
                     <td>{{todo.title}}</td>
                     <td>{{todo.desc}}</td>
                     <td class="crazy_buttons">
-                        <a class="btn btn-primary btn-sm mx-3" href="/update/{{todo.sno}}" role="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1rem;">Update</a>
-                        <a class="btn btn-outline-danger btn-sm mx-3" href="/delete/{{todo.sno}}" role="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1rem;">Delete</a>
+                        <a class="btn btn-primary btn-sm mx-3" href="/update/{{ loop.index0 }}" role="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1rem;">Update</a>
+                        <a class="btn btn-outline-danger btn-sm mx-3" href="/delete/{{ loop.index0 }}" role="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1rem;">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}

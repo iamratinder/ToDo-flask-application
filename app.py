@@ -1,23 +1,9 @@
-from flask import Flask,render_template,request,redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect, session
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-class Todo(db.Model):
-    sno = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    desc = db.Column(db.String(500), nullable=False)
-
-    def __repr__(self) -> str:
-        return f"{self.sno} - {self.title}"
-    
-with app.app_context():
-        db.create_all()  # Create all tables
+# Set a secret key for session management
+app.secret_key = 'your_secret_key'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -25,37 +11,46 @@ def home():
         title = request.form['title']
         desc = request.form['desc']
         if len(title) != 0:
-            todo = Todo(title=title, desc=desc)
-            db.session.add(todo)
-            db.session.commit()
-    allTodo = Todo.query.all()
-    return render_template('index.html', allTodo = allTodo)
+            # If the 'todos' list does not exist in session, initialize it
+            if 'todos' not in session:
+                session['todos'] = []
+            # Add a new todo to the session
+            session['todos'].append({'title': title, 'desc': desc})
+            session.modified = True  # Mark the session as modified so it will be saved
+    # Get the todos from session
+    allTodo = session.get('todos', [])
+    return render_template('index.html', allTodo=allTodo)
 
 
-@app.route('/update/<int:sno>', methods=['GET', 'POST'])
-def update(sno):
+@app.route('/update/<int:index>', methods=['GET', 'POST'])
+def update(index):
+    if 'todos' not in session or len(session['todos']) <= index:
+        return redirect('/')
+
     if request.method == 'POST':
         title = request.form['title']
         desc = request.form['desc']
         if len(title) != 0:
-            todo = Todo.query.filter_by(sno=sno).first()
-            todo.title = title
-            todo.desc = desc
-            db.session.add(todo)
-            db.session.commit()
+            # Update the todo at the specified index
+            session['todos'][index]['title'] = title
+            session['todos'][index]['desc'] = desc
+            session.modified = True  # Mark the session as modified
         return redirect('/')
 
-    todo = Todo.query.filter_by(sno=sno).first()
-    return render_template('update.html', todo = todo)
+    todo = session['todos'][index]
+    return render_template('update.html', todo=todo, index=index)
 
-@app.route('/delete/<int:sno>')
-def delete(sno):
-    todo = Todo.query.filter_by(sno=sno).first()
-    db.session.delete(todo)
-    db.session.commit()
+
+@app.route('/delete/<int:index>')
+def delete(index):
+    if 'todos' not in session or len(session['todos']) <= index:
+        return redirect('/')
+    
+    # Remove the todo at the specified index
+    del session['todos'][index]
+    session.modified = True  # Mark the session as modified
     return redirect('/')
 
 
 if __name__ == '__main__':
-    
     app.run(debug=False)
