@@ -16,7 +16,7 @@ A simple Todo application built with Flask. This application allows users to cre
 - **HTML/CSS**: For the frontend user interface.
 - **Deployed on**: Vercel
 
-### 🌐 Chekout the Application : [Link](to-do-flask-application.vercel.app)
+### 🌐 Chekout the Application : [Link](https://to-do-flask-application.vercel.app/)
 
 ## 📂 File Structure
 ```
