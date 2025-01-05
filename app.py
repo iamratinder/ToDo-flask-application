@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, session
 
 app = Flask(__name__)
 
-# Set a secret key for session management
 app.secret_key = 'your_secret_key'
 
 @app.route('/', methods=['GET', 'POST'])
@@ -17,6 +16,7 @@ def home():
             # Add a new todo to the session
             session['todos'].append({'title': title, 'desc': desc})
             session.modified = True  # Mark the session as modified so it will be saved
+        return redirect('/')
     # Get the todos from session
     allTodo = session.get('todos', [])
     return render_template('index.html', allTodo=allTodo)
