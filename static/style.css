@@ -63,6 +63,10 @@ li button {
     text-align: right;
 }
 
+.custom-class{
+    margin-top: 5px;
+}
+
 @media (max-width: 768px){
     .container {
         width: 90vw;
@@ -70,7 +74,7 @@ li button {
         background: white;
         padding: 20px;
         border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
     }
     .table-responsive{
         margin: 0px;
@@ -81,7 +85,7 @@ li button {
         width: 100%;
     }
 }
-@media (max-width: 1000px) {
+@media (max-width: 1090px) {
     .navbar {
         display: none; /* Hides the navbar */
     }
