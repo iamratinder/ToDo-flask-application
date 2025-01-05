@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+    <div class="container">
+        <form action="/update/{{todo.sno}}" method="post">
+            <h1>Update Task</h1>
+            <input type="text" id="taskInput" name="title" value="{{todo.title}}" placeholder="Update...">
+            <input type="text" id="description" name="desc" value="{{todo.desc}}" placeholder="Update Description...">
+            <button id="addTaskButton">Update</button>
+            <ul id="taskList"></ul>
+        </form>
+    </div>
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+{% endblock body %}
