@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% block body %}
 
-
+    <style>
+        body{
+            background-color: rgb(171, 171, 171);
+        }
+    </style>
     <div class="container">
         <form action="/update/{{ index }}" method="post">
             <h1>Update Task</h1>
             <input type="text" id="taskInput" name="title" value="{{ todo['title'] }}" placeholder="Update...">
             <input type="text" id="description" name="desc" value="{{ todo['desc'] }}" placeholder="Update Description...">
-            <button id="addTaskButton">Update</button>
+            <button id="addTaskButton"3f0a5a0ab431585decc1358acbc223be15df0997>Update</button>
             <ul id="taskList"></ul>
         </form>
     </div>
